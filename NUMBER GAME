@@ -1,0 +1,47 @@
+import java.util.Random;
+import java.util.Scanner;
+public class NumberGame 
+{
+    public static void main(String[] args) 
+{
+        Random random = new Random();
+        int randomNumber = random.nextInt(100) + 1;
+        int MAttempts = 10;
+        int NoofTries = 0;
+        int MScore = 100;
+        int CScore = MScore;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Number Guessing Game!");
+        System.out.println("I have selected a number between 1 and 100. You have " + MAttempts + " attempts to guess it.");
+        System.out.println("You start with a score of 100. Each incorrect guess will deduct 10 points.");
+        while (NoofTries < MAttempts) 
+{
+            System.out.println("Attempts remaining: " + (MAttempts - NoofTries));
+            System.out.println("Your current score: " + CScore);
+            System.out.print("Enter your guess: ");
+            int UGuess = scanner.nextInt();
+            NoofTries++;
+            if (UGuess < 1 || UGuess > 100)
+{
+                System.out.println("Please enter a number between 1 and 100.");
+                NoofTries--;
+            } else if (UGuess < randomNumber) {
+                System.out.println("Too low! Try again.");
+                CScore -= 10;
+            } else if (UGuess > randomNumber) {
+                System.out.println("Too high! Try again.");
+                CScore -= 10;
+            } else {
+                System.out.println("Congratulations! You've guessed the number " + randomNumber + " in " + NoofTries + " tries.");
+                break;
+            }
+        }
+        if (CScore <= 0) {
+            CScore = 0;
+        }
+        System.out.println("Game over.");
+        System.out.println("Your final score: " + CScore);
+        System.out.println("The correct number was " + randomNumber + ".");
+        scanner.close();
+    }
+}
